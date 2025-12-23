@@ -58,4 +58,4 @@ def ensure_dir(path):
 
 def write_json(path, data):
     with open(path, "w", encoding="utf-8") as handle:
-        json.dump(data, handle, indent=2, ensure_ascii=True)
+        json.dump(data, handle, indent=2, ensure_ascii=False)
