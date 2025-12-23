@@ -1,0 +1,18 @@
+BASE_URL = "https://admoneymachine.com"
+API_BASE = BASE_URL + "/wp-json/wp/v2"
+
+CATEGORIES_ENDPOINT = API_BASE + "/categories"
+POSTS_ENDPOINT = API_BASE + "/posts"
+
+PER_PAGE = 100
+OUTPUT_DIR = "output"
+
+REQUEST_TIMEOUT = 30
+MAX_RETRIES = 4
+RETRY_BACKOFF = 1.5
+
+CONCURRENT_REQUESTS = 8
+CONCURRENT_POSTS = 6
+CONCURRENT_DOWNLOADS = 4
+
+USER_AGENT = "admoneymachine-pdf-scraper/1.0"
