@@ -72,6 +72,7 @@ async def process_post(post, category_map, client, output_dir, download_semaphor
     metadata = {
         "post_id": post_id,
         "post_title": title_text,
+        "post_url": config.BASE_URL + "/?p=" + str(post_id),
         "date": date_value,
         "category_ids": category_ids,
         "category_names": category_names,
