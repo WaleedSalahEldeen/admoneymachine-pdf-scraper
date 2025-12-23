@@ -1,6 +1,6 @@
 from html import unescape
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 from scraper import config
 from scraper.downloader import download_pdf
@@ -18,9 +18,9 @@ def make_post_dir(output_dir, title, post_id):
 
 
 def build_pdf_filename(link_text, url, used_names):
-    name_source = link_text
+    name_source = unquote(Path(urlparse(url).path).name)
     if not name_source:
-        name_source = Path(urlparse(url).path).name or "document"
+        name_source = link_text or "document"
     base_name = safe_filename(name_source, default="document")
     if not base_name.lower().endswith(".pdf"):
         base_name = base_name + ".pdf"
@@ -48,6 +48,8 @@ async def process_post(post, category_map, client, output_dir, download_semaphor
     category_names = [category_map.get(cat_id, "") for cat_id in category_ids]
 
     pdf_links = extract_pdf_links(content_html, config.BASE_URL)
+    if len(pdf_links) > 1:
+        print("Multiple PDFs in post " + str(post_id) + ": " + str(len(pdf_links)))
     post_dir = make_post_dir(output_dir, title_text, post_id)
 
     used_names = set()
